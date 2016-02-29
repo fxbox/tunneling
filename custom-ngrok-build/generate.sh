@@ -8,12 +8,6 @@ else
   echo "Missing dependency GO compiler"
   exit 1
 fi
-if hash go-bindata 2>/dev/null; then
-  echo "Found go-bindata"
-else
-  echo "Missing dependency go-bindata"
-  exit 2
-fi
 
 # Clean up
 echo "Cleaning up ..."
@@ -42,7 +36,7 @@ PRIVKEY="/etc/letsencrypt/live/${DOMAIN}/privkey.pem"
 TRUST_CERT="false"
 if [ -e "$PRIVKEY" ]; then
   echo "LetsEncrypt certificates for ${DOMAIN} found!"
-  cp "/etc/letsencrypt/live/${DOMAIN}/fullchain.pem" assets/client/tls/ngrokroot.crt > /dev/null 2>&1
+  cp "/etc/letsencrypt/live/${DOMAIN}/chain.pem" assets/client/tls/ngrokroot.crt > /dev/null 2>&1
   CERTIFICATE="/etc/letsencrypt/live/${DOMAIN}/cert.pem"
   TRUST_CERT="true"
 else
